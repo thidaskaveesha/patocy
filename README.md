@@ -1,2 +1,2 @@
 # patocy
-Many school leavers go for the software engineering title as a career path without a clear understanding of what they are passionate about and what type of career to pursue in the various careers inside the IT industry.
+Many school leavers go for the software engineering title as a career path without a clear understanding of what they are passionate about and what type of career to pursue in the various careers inside the IT industry. Thus, many undergraduates are dropping out of college halfway through the second year, and several individuals suffer a lot of stress in their career as software engineers to solve this problem Team 10 is developing a system called patocy where we make user to understand their passion and choose very sutable career.
