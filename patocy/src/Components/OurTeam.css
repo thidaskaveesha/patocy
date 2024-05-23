@@ -37,6 +37,7 @@
     justify-content: center;
     gap: 50px;
     min-height: 70vh;
+    padding-bottom: 5rem;
 }
 
 .card {
