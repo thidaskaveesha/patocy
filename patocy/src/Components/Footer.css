@@ -3,4 +3,75 @@
     min-height: 425px;
     background-color: #0C1E2F;
     border-radius: 40px 40px 0 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.footer-logo {
+    flex: 1;
+}
+
+.vertical-hr {
+    border-left: 1px solid #ffffff76;
+    height: 300px;
+    margin: 0 20px;
+}
+
+#map,
+#follow {
+    margin: 0 10px;
+}
+
+#map {
+    background-color: #1C3A4F;
+    height: 300px;
+    flex: 2;
+    border-radius: 15px;
+}
+
+#follow {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#follow h1 {
+    color: white;
+    font-size: 1.5em;
+    margin: 10px 0;
+    font-weight: 800;
+}
+
+#follow h3 {
+    color: white;
+    font-size: 0.9em;
+    margin: 10px 0;
+    text-align: left;
+}
+
+#follow a {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#follow i {
+    font-size: 1.2em;
+    margin-right: 10px;
+}
+
+.insideContet {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+
 }

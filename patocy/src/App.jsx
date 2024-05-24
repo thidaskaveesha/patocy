@@ -5,11 +5,13 @@ import OurTeam from './Components/OurTeam';
 import Faq from './Components/Faq';
 import Contact from './Components/Contact';
 import Footer from './Components/Footer';
+import Nav from './Components/Nav';
 
 function App() {
 
   return (
     <>
+      <Nav />
       <Home />
       <OurTeam />
       <Faq />
