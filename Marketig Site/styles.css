@@ -1,7 +1,5 @@
 :root {
     font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    min-width: 100vw;
-    min-height: 100vh;
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
     background-color: #005EB4;
@@ -11,87 +9,16 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
+
 body {
+    max-width: 100vw;
     margin: 0;
     padding: 0;
     background-color: #005EB4;
 }
 
-#nav {
-    position: fixed;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #005EB4;
-    padding: 0 60px;
-    width: 90%;
-    max-width: 1200px;
-    height: 93px;
-    border-radius: 50px;
-}
-
-#nav img {
-    margin-top: 20px;
-    height: 150px;
-}
-
-#nav-links {
-    display: flex;
-    gap: 20px;
-}
-
-#nav-links a {
-    color: white;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 16px;
-}
-
-#nav-button {
-    background-color: #82E631;
-    color: white;
-    border: none;
-    padding: 8px 30px;
-    border-radius: 45px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-#nav i {
-    color: white;
-    border: 2px solid white;
-    padding: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    display: none;
-}
-
-#nav-button:hover {
-    background-color: #79ff0b;
-}
-
-@media (max-width: 765px) {
-    #nav {
-        padding: 10px;
-    }
-
-    #nav i {
-        display: block;
-    }
-
-    #nav-links,
-    #nav-button {
-        display: none;
-    }
-}
-
 #home {
-    min-width: 100vw;
+    max-width: 100vw;
     min-height: 100vh;
     margin: 0;
     padding: 0;
@@ -189,7 +116,7 @@ body {
 }
 
 #ourTeam {
-    min-width: 100vw;
+    max-width: 100vw;
     min-height: 100vh;
     margin: 0;
     padding: 0;
@@ -269,7 +196,7 @@ body {
 }
 
 #faq {
-    min-width: 100vw;
+    max-width: 100vw;
     min-height: 100vh;
     background-color: #0C1E2F;
     border: 0;
@@ -318,7 +245,7 @@ body {
 }
 
 #contact {
-    min-width: 100vw;
+    max-width: 100vw;
     min-height: 100vh;
     display: flex;
     flex-wrap: wrap;
@@ -438,7 +365,7 @@ body {
 }
 
 #footer {
-    min-width: 100vw;
+    max-width: 100vw;
     min-height: 425px;
     background-color: #0C1E2F;
     border-radius: 40px 40px 0 0;
