@@ -57,12 +57,14 @@
 .navbar-collapse {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .navbar-nav {
     display: flex;
     flex-direction: row;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .navbar-nav .nav-item {
@@ -172,7 +174,7 @@ body {
 }
 
 #homeImage img {
-    width: 400px;
+    width: 450px;
     animation: rotateScale 25s linear infinite;
 }
 
