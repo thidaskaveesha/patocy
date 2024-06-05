@@ -1,51 +1,76 @@
-import React, { useState } from "react";
-import InputField from "../components/InputField";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
+import { auth, db } from '../firebase';
+import InputField from '../components/InputField';
 import styles from './LoginPage.module.css';
 
+
 function LoginPage() {
-    const [email, setEmail] = useState('');
+    // Using usestate to store the username and password
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
+    const navigate = useNavigate();
+    // Function to handle the change in the username field
+    const handleUsernameChange = (e) => {
+        setUsername(e.target.value);
     };
-
-    const handlePasswordChange = (event) => {
-        setPassword(event.target.value);
+    // Function to handle the change in the password field
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
     };
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // Handle login logic here
-        console.log("Email:", email);
-        console.log("Password:", password);
+    // Function to handle the form submission which is called when the user clicks on the login button
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Login logic here
+        console.log('Username:', username, 'Password:', password);
+    };
+    // Function to handle the forgot password functionality
+    const handleForgotPassword = () => {
+        // Navigate to the forgotpassword page
+        //console.log('Forgot password clicked');
+        navigate('/reset-password');
+    };
+    // Function to handle the register click
+    const handleRegisterClick = () => {
+        // Navigate to the choosing-role page
+        navigate('/choosing-role');
     };
 
     return (
-        <div className={styles['container']}>
-            <h1>Login <span>Here</span></h1>
-            <p>Hey there! Nice to see you here...</p>
-            <form onSubmit={handleSubmit}>
+        // Main container which contains the child container
+        <div className={styles['login-container']}>
+            {/* Child container which contains the login form */}
+            <form className={styles['login-form']} onSubmit={handleSubmit}>
+                {/* Login title */}
+                <h2 className={styles['login-title']}>Login <span>Here</span></h2>
+                {/* Login sentence */}
+                <p className={styles['login-para']}>Hey there! Nice to see you here...</p>
+                {/* Input fields for username and password */}
                 <InputField
+                    label="Username"
                     type="text"
-                    name="email"
-                    label="Email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={handleEmailChange}
+                    name="username"
+                    placeholder="Enter your username"
+                    value={username}
+                    onChange={handleUsernameChange}
                 />
                 <InputField
+                    label="Password"
                     type="password"
                     name="password"
                     placeholder="Enter your password"
-                    label="Password"
                     value={password}
                     onChange={handlePasswordChange}
                 />
-                <p>Forgot password?</p>
-                <button type="submit">Login</button>
+                {/* Forgot password functionality */}
+                <p className={styles['forgot-para']}> <span onClick={handleForgotPassword}>Forgot password?</span></p>
+                {/* Login button */}
+                <button className={styles['login-button']} type="submit">Login</button>
             </form>
-            <p>If you haven't an account please click here</p>
+            {/* Register text */}
+            <p className={styles['registerText']} onClick={handleRegisterClick}>If you haven't an account please click here</p>
         </div>
     );
 }
