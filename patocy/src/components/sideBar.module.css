@@ -1,0 +1,177 @@
+/* Reset default browser styles */
+
+/* 
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #f5f5f5;
+    display: inline-block;
+}
+ */
+
+
+.container {
+    background-color: #0C1E2F;
+    /* Sidebar background color */
+    width: 200px;
+    /* Sidebar width */
+    min-height: 100vh;
+    /* Minimum height to fill viewport */
+    margin: 0;
+    /* Reset margins */
+    padding: 0;
+    /* Reset padding */
+    display: flex;
+    /* Flex container */
+    flex-direction: column;
+    /* Arrange children vertically */
+    justify-content: space-between;
+    /* Space between children */
+}
+
+.logo {
+    width: 95px;
+    /* Logo width */
+    height: 52px;
+    /* Logo height */
+}
+
+.top {
+    display: flex;
+    /* Flex container */
+    justify-content: space-between;
+    /* Space between items */
+    align-items: center;
+    /* Align items vertically */
+    padding: 10px;
+    /* Padding */
+    color: white;
+    /* Text color */
+}
+
+.menuCollapse {
+    width: 20px;
+    /* Icon width */
+    margin-right: 5px;
+    margin-left: 4px;
+    /* Margin */
+    cursor: pointer;
+    /* Cursor on hover */
+}
+
+.user img {
+    margin-left: -6px;
+    width: 30px;
+    /* Avatar width */
+    height: 30px;
+    /* Avatar height */
+    border-radius: 50px;
+    /* Round avatar */
+}
+
+.user p,
+.item p,
+.bottomItem p {
+    font-size: 14px;
+    /* Font size */
+    color: white;
+    /* Text color */
+    margin-left: 5px;
+    /* Margin */
+}
+
+.user,
+.item {
+    display: flex;
+    /* Flex container */
+    align-items: center;
+    /* Align items vertically */
+    gap: 5px;
+    /* Gap between items */
+}
+
+.userTab,
+.itemTab {
+    display: flex;
+    /* Flex container */
+    align-items: center;
+    /* Align items vertically */
+    padding: 15px;
+    /* Padding */
+    cursor: pointer;
+    /* Cursor on hover */
+}
+
+hr {
+    width: 100%;
+    /* Full width */
+    border: 0;
+    /* No border */
+    border-top: 0.5px solid #ffffff84;
+    /* White horizontal line */
+    margin: 10px auto;
+    /* Margin */
+}
+
+.BottomItemTab {
+    display: flex;
+    /* Flex container */
+    align-items: center;
+    /* Align items vertically */
+    padding: 5px;
+    /* Padding */
+    cursor: pointer;
+    /* Cursor on hover */
+}
+
+.bottomItem {
+    display: flex;
+    /* Flex container */
+    align-items: center;
+    /* Align items vertically */
+    gap: 7px;
+    /* Gap between items */
+    margin-left: 5px;
+}
+
+.userTab {
+    padding-bottom: 0;
+    /* Remove bottom padding */
+    justify-content: space-between;
+    /* Space between items */
+}
+
+.userTab:hover,
+.itemTab:hover,
+.BottomItemTab:hover {
+    background-color: #808080;
+    /* Background color on hover */
+}
+
+.item img {
+    width: 20px;
+    /* Icon width */
+    height: 20px;
+    /* Icon height */
+}
+
+.bottom {
+    margin-top: auto;
+    /* Pushes the bottom section to the bottom */
+}
+
+.hidden {
+    display: none;
+    /* Hide element */
+}
+
+.collapsed {
+    width: 50px;
+    /* Collapsed sidebar width */
+}
+
+.collapsed .logo {
+    display: none;
+    /* Hide logo when collapsed */
+}
