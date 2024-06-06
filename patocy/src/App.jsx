@@ -6,6 +6,8 @@ import LoginPage from './pages/LoginPage'
 import ForgotPassword from './pages/ForgotPassword'
 import HomePageConsultants from './pages/HomePageConsultants'
 import HomePageLookers from './pages/HomePageLookers'
+import RoleDetails from './components/RoleDetails'
+import ITIndustry from './components/ITIndustry'
 
 import './App.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
@@ -22,6 +24,8 @@ function App() {
           <Route path="/register-consultants" element={<RegisterPageConsultants />} />
           <Route path="/dashboard" element={<HomePageLookers />} />
           <Route path="/dashboard-consultants" element={<HomePageConsultants />} />
+          <Route path="/roles" element={<ITIndustry />} />
+          <Route path="/roles/:id" element={<RoleDetails />} />
         </Routes>
       </Router>
     </>
