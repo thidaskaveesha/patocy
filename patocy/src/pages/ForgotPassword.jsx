@@ -1,21 +1,38 @@
 import React, { useState } from "react";
 import styles from './ForgotPassword.module.css';
 import InputField from '../components/InputField';
+import { auth } from '../firebase';
 
 function ForgotPassword() {
     const [Email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
+
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
-    }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setMessage('');
+        setError('');
+
+        try {
+            await auth.sendPasswordResetEmail(Email);
+            setMessage('Password reset email sent successfully.');
+        } catch (error) {
+            setError('Failed to send password reset email. Please check the email and try again.');
+        }
+    };
+
     return (
         <div className={styles["container"]}>
             <h2 className={styles["title"]}>Reset <span>Password</span></h2>
-            <p className={styles["para"]}>Enter your email address and we will send you a link to reset your password</p>
-            <form className={styles["form"]}>
-                {/* Input fields for username and password */}
+            <p className={styles["para"]}>Forgot your password, No problem...</p>
+            <form className={styles["form"]} onSubmit={handleSubmit}>
                 <InputField
                     label="Email"
-                    type="text"
+                    type="email"
                     name="Email"
                     placeholder="Enter your email associated with the account"
                     value={Email}
@@ -23,7 +40,8 @@ function ForgotPassword() {
                 />
                 <button className={styles["button"]} type="submit">Reset password</button>
             </form>
-            <div className={styles["result-text"]}></div>
+            {message && <div className={styles["result-text"]}>{message}</div>}
+            {error && <div className={styles["error-text"]}>{error}</div>}
         </div>
     );
 }

@@ -4,6 +4,9 @@ import RegisterPageLookers from './pages/RegisterPageLookers'
 import RegisterPageConsultants from './pages/RegisterPageConsultants'
 import LoginPage from './pages/LoginPage'
 import ForgotPassword from './pages/ForgotPassword'
+import HomePageConsultants from './pages/HomePageConsultants'
+import HomePageLookers from './pages/HomePageLookers'
+
 import './App.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 function App() {
@@ -17,6 +20,8 @@ function App() {
           <Route path="/reset-password" element={<ForgotPassword />} />
           <Route path="/register-lookers" element={<RegisterPageLookers />} />
           <Route path="/register-consultants" element={<RegisterPageConsultants />} />
+          <Route path="/dashboard" element={<HomePageLookers />} />
+          <Route path="/dashboard-consultants" element={<HomePageConsultants />} />
         </Routes>
       </Router>
     </>

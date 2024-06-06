@@ -11,7 +11,9 @@ function LoginPage() {
     // Using usestate to store the username and password
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
     const navigate = useNavigate();
+
     // Function to handle the change in the username field
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
@@ -21,10 +23,33 @@ function LoginPage() {
         setPassword(e.target.value);
     };
     // Function to handle the form submission which is called when the user clicks on the login button
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Login logic here
-        console.log('Username:', username, 'Password:', password);
+        setError('');
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, username, password);
+            const user = userCredential.user;
+            const userDoc = await getDoc(doc(db, 'users', user.uid));
+            if (userDoc.exists()) {
+                const userData = userDoc.data();
+                console.log('User data:', userData);
+
+                // Navigate based on user role
+                if (userData.role === 'Industry lookers') {
+                    navigate('/dashboard');
+                } else if (userData.role === 'Consultants') {
+                    navigate('/dashboard-consultants');
+                } else {
+                    setError('Unknown user role');
+                }
+            } else {
+                console.log('No such document!');
+                setError('User data not found');
+            }
+        } catch (error) {
+            setError(error.message);
+            console.error('Error logging in:', error);
+        }
     };
     // Function to handle the forgot password functionality
     const handleForgotPassword = () => {
@@ -71,6 +96,7 @@ function LoginPage() {
             </form>
             {/* Register text */}
             <p className={styles['registerText']} onClick={handleRegisterClick}>If you haven't an account please click here</p>
+            {error && <p className={styles['error']}>{error}</p>}
         </div>
     );
 }
