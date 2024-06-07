@@ -22,8 +22,8 @@ function App() {
           <Route path="/reset-password" element={<ForgotPassword />} />
           <Route path="/register-lookers" element={<RegisterPageLookers />} />
           <Route path="/register-consultants" element={<RegisterPageConsultants />} />
-          <Route path="/dashboard" element={<HomePageLookers />} />
-          <Route path="/dashboard-consultants" element={<HomePageConsultants />} />
+          <Route path="/home" element={<HomePageLookers />} />
+          <Route path="/home-consultants" element={<HomePageConsultants />} />
           <Route path="/roles" element={<ITIndustry />} />
           <Route path="/roles/:id" element={<RoleDetails />} />
         </Routes>
