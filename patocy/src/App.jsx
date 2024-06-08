@@ -7,7 +7,7 @@ import ForgotPassword from './pages/ForgotPassword'
 import HomePageConsultants from './pages/HomePageConsultants'
 import HomePageLookers from './pages/HomePageLookers'
 import RoleDetails from './components/RoleDetails'
-import ITIndustry from './components/ITIndustry'
+import ITIndustry from './pages/ITIndustryPage'
 
 import './App.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
