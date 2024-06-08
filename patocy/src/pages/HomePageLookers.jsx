@@ -5,13 +5,14 @@ import SideBar from "../components/sideBar";
 import changeStyles from "../changeStyles";
 
 function HomePageLookers() {
-    // Change the background color of the body and display block
     changeStyles();
 
     return (
         <div className={styles.container}>
             <SideBar />
-            <AISupport />
+            <div className={styles.content}>
+                <AISupport />
+            </div>
         </div>
     );
 }
