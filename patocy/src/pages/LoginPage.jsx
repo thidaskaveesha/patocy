@@ -29,6 +29,7 @@ function LoginPage() {
         try {
             const userCredential = await signInWithEmailAndPassword(auth, username, password);
             const user = userCredential.user;
+            console.log('User logged in:', user.uid);
             const userDoc = await getDoc(doc(db, 'users', user.uid));
             if (userDoc.exists()) {
                 const userData = userDoc.data();
@@ -36,9 +37,9 @@ function LoginPage() {
 
                 // Navigate based on user role
                 if (userData.role === 'Industry lookers') {
-                    navigate('/dashboard');
+                    navigate('/home');
                 } else if (userData.role === 'Consultants') {
-                    navigate('/dashboard-consultants');
+                    navigate('/home-consultants');
                 } else {
                     setError('Unknown user role');
                 }
