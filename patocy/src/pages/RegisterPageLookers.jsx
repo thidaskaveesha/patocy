@@ -2,94 +2,112 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../components/InputField';
 import styles from './RegisterPageLookers.module.css';
-
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
+import { auth, db } from '../firebase';
 
 function RegisterPageLookers() {
-    // Using usestate to store the username and password
+    // State variables for storing form inputs
     const [Email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [Name, setName] = useState('');
     const [ConfirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate();
-    // Function to handle the change in the username field
+
+    // Handlers to update state variables based on user input
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
     };
-    // Function to handle the change in the password field
+
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
     };
+
     const handleNameChange = (e) => {
         setName(e.target.value);
     };
+
     const handleConfirmPasswordChange = (e) => {
         setConfirmPassword(e.target.value);
     };
-    // Function to handle the form submission which is called when the user clicks on the login button
-    const handleSubmit = (e) => {
+
+    // Handler for form submission
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Login logic here
-        console.log('Email:', Email, 'Password:', password, 'Name:', Name, 'ConfirmPassword', ConfirmPassword);
+        // Check if password and confirm password match
+        if (password !== ConfirmPassword) {
+            alert("Passwords do not match!");
+            return;
+        }
+        try {
+            // Create a new user with email and password using Firebase Authentication
+            const userCredential = await createUserWithEmailAndPassword(auth, Email, password);
+            const user = userCredential.user;
+
+            // Store additional user details in Firestore
+            await setDoc(doc(db, "users", user.uid), {
+                name: Name,
+                email: Email,
+                role: "Industry lookers" // Set the role as "Industry lookers"
+            });
+
+            console.log('User registered and additional details saved:', user);
+            navigate('/home'); // Navigate to the home page after successful registration
+        } catch (error) {
+            console.error("Error registering user:", error);
+            alert(error.message); // Display error message if registration fails
+        }
     };
-    // Function to handle the forgot password functionality
+
+    // Handler for navigating to the login page
     const handleHaveAnAccount = () => {
-        // Navigate to the forgotpassword page
-        //console.log('Forgot password clicked');
-        navigate('/LoginPage');
-    };
-    // Function to handle the register click
-    const handleRegisterClick = () => {
-        // Navigate to the choosing-role page
-        navigate('/choosing-role');
+        navigate('/');
     };
 
     return (
-        // Main container which contains the child container
+        // Main container for the registration form
         <div className={styles["Register-container"]}>
-            {/* Child container which contains the login form */}
             <form className={styles['Register-form']} onSubmit={handleSubmit}>
-                {/* Login title */}
                 <h2 className={styles['SignUp-title']}>Sign Up <span>Here</span></h2>
-                {/* Login sentence */}
                 <p className={styles['SignUp-para']}>Hey there! Nice to see you here...</p>
-                {/* Input fields for username and password */}
+                {/* Input fields for name, email, password, and confirm password */}
                 <InputField
-                        type="text"
-                        name="name"
-                        label="Name"
-                        placeholder="Enter your name"
-                        value=""
-                        onChange={() => {}}
-                    />
-                    <InputField
-                        type="text"
-                        name="email"
-                        label="Email"
-                        placeholder="Enter your email"
-                        value=""
-                        onChange={() => {}}
-                    />
-                    <InputField
-                        type="password"
-                        name="password"
-                        label="Password"
-                        placeholder="Enter your password"
-                        value=""
-                        onChange={() => {}}
-                    />
-                    <InputField
-                        type="password"
-                        name="confirm-password"
-                        label="Confirm Password"
-                        placeholder="Confirm your password"
-                        value=""
-                        onChange={() => {}}
-                    />
-                {/* Login button */}
+                    type="text"
+                    name="name"
+                    label="Name"
+                    placeholder="Enter your name"
+                    value={Name}
+                    onChange={handleNameChange}
+                />
+                <InputField
+                    type="text"
+                    name="email"
+                    label="Email"
+                    placeholder="Enter your email"
+                    value={Email}
+                    onChange={handleEmailChange}
+                />
+                <InputField
+                    type="password"
+                    name="password"
+                    label="Password"
+                    placeholder="Enter your password"
+                    value={password}
+                    onChange={handlePasswordChange}
+                />
+                <InputField
+                    type="password"
+                    name="confirm-password"
+                    label="Confirm Password"
+                    placeholder="Confirm your password"
+                    value={ConfirmPassword}
+                    onChange={handleConfirmPasswordChange}
+                />
+                {/* Register button */}
                 <button className={styles['Register-button']} type="submit">Register</button>
             </form>
-            {/* Register text */}
-            <p className={styles['registerText']} onClick={handleRegisterClick}>If you have an account please click here</p>
+            {/* Text to navigate to the login page */}
+            <p className={styles['registerText']} onClick={handleHaveAnAccount}>If you have an account please click here</p>
         </div>
     );
 }
