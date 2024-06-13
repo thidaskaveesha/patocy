@@ -1,27 +1,40 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import InputField from '../components/InputField';
+import CustomModal from '../components/CustomModal';
 import styles from './RegisterPageConsultants.module.css';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 
 function RegisterPageConsultants() {
-    // State variables for storing form inputs
-    const [Email, setEmail] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [Bio, setBio] = useState('');
-    const [Name, setName] = useState('');
-    const [confirmPassword, setconfirmPassword] = useState('');
+    const [bio, setBio] = useState('');
+    const [name, setName] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
+    const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
 
-    // Handlers to update state variables based on user input
+    // Define validation message state variables
+    const [passwordMessage, setPasswordMessage] = useState('');
+    const [confirmPasswordMessage, setConfirmPasswordMessage] = useState('');
+
+    // Handlers for input changes
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
     };
 
     const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
+        const value = e.target.value;
+        setPassword(value);
+        // Set password validation message based on length
+        if (value.length < 6) {
+            setPasswordMessage('Password must be at least 6 characters');
+        } else {
+            setPasswordMessage('Password length is sufficient');
+        }
     };
 
     const handleBioChange = (e) => {
@@ -33,60 +46,67 @@ function RegisterPageConsultants() {
     };
 
     const handleConfirmPasswordChange = (e) => {
-        setconfirmPassword(e.target.value);
+        const value = e.target.value;
+        setConfirmPassword(value);
+        // Set confirm password validation message based on match with password
+        if (value !== password) {
+            setConfirmPasswordMessage('Passwords do not match');
+        } else {
+            setConfirmPasswordMessage('Passwords match');
+        }
     };
 
-    // Handler for form submission
+    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // Check if password and confirm password match
         if (password !== confirmPassword) {
-            alert("Passwords do not match!");
+            setError("Passwords do not match!");
+            setShowModal(true);
             return;
         }
         try {
-            // Create a new user with email and password using Firebase Authentication
-            const userCredential = await createUserWithEmailAndPassword(auth, Email, password);
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
-            // Store additional user details in Firestore
             await setDoc(doc(db, "users", user.uid), {
-                name: Name,
-                email: Email,
-                bio: Bio,
+                name: name,
+                email: email,
+                bio: bio,
                 role: "Consultants"
             });
 
             console.log('User registered and additional details saved:', user);
-            navigate('/home-consultants'); // Navigate to the home page after successful registration
+            navigate('/home-consultants');
         } catch (error) {
             console.error("Error registering user:", error);
-            alert(error.message); // Display error message if registration fails
+            setError('Something went wrong, please try again later.');
+            setShowModal(true);
         }
     };
 
-    // Handler for navigating to the login page
+    // Navigate to login page
     const handleHaveAnAccount = () => {
         navigate('/');
     };
 
+    // Close modal
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
     return (
         <div className={styles['bi']}>
-            {/* Main container which contains the child container*/}
             <div className={styles['cRegister-container']}>
-                {/* Child container which contains the login form */}
                 <form className={styles['Register-form']} onSubmit={handleSubmit}>
-                    {/* Login title */}
                     <h2 className={styles['SignUp-title']}>Sign Up <span>Here</span></h2>
-                    {/* Login sentence */}
                     <p className={styles['SignUp-para']}>Hey there! Nice to see you here...</p>
-                    {/* Input fields for username and password */}
+                    {/* Input fields */}
                     <InputField
                         type="text"
                         name="name"
                         label="Name"
                         placeholder="Enter your name"
-                        value={Name}
+                        value={name}
                         onChange={handleNameChange}
                     />
                     <InputField
@@ -94,14 +114,13 @@ function RegisterPageConsultants() {
                         name="email"
                         label="Email"
                         placeholder="Enter your email"
-                        value={Email}
+                        value={email}
                         onChange={handleEmailChange}
                     />
-                    <lable className={styles['tAreaLable']}>
+                    <label className={styles['tAreaLable']}>
                         Bio
                         <textarea className={styles['tArea']} onChange={handleBioChange} name="Bio" placeholder="Enter your Bio" rows={4} cols={40} />
-
-                    </lable>
+                    </label>
                     <InputField
                         type="password"
                         name="password"
@@ -110,6 +129,11 @@ function RegisterPageConsultants() {
                         value={password}
                         onChange={handlePasswordChange}
                     />
+                    {/* Password validation message */}
+                    <p className={password.length < 6 ? styles['error-text'] : styles['success-text']}>
+                        {passwordMessage}
+                    </p>
+
                     <InputField
                         type="password"
                         name="confirm-password"
@@ -118,12 +142,18 @@ function RegisterPageConsultants() {
                         value={confirmPassword}
                         onChange={handleConfirmPasswordChange}
                     />
+                    {/* Confirm password validation message */}
+                    <p className={password !== confirmPassword ? styles['error-text'] : styles['success-text']}>
+                        {confirmPasswordMessage}
+                    </p>
                     {/* Register button */}
                     <button className={styles['Register-button']} type="submit">Register</button>
                 </form>
-                {/* Register text */}
+                {/* Link to navigate to login page */}
                 <p className={styles['registerText']} onClick={handleHaveAnAccount}>If you have an account please click here</p>
             </div>
+            {/* Modal for displaying error messages */}
+            {showModal && <CustomModal open={showModal} message={error} onClose={closeModal} />}
         </div>
     );
 }

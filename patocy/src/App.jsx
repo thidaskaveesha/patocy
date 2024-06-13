@@ -9,7 +9,6 @@ import HomePageLookers from './pages/HomePageLookers'
 import RoleDetails from './pages/ITRoleDescription'
 import ITIndustry from './pages/ITIndustryPage'
 import CounselorsPage from './pages/CounselorsPage'
-
 import './App.css'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 function App() {

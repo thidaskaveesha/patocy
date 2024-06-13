@@ -13,6 +13,21 @@ body {
     height: 100vh;
 }
 
+.error-text,
+.success-text {
+    font-size: 12px;
+    margin-left: 10px;
+    margin-top: -5px;
+}
+
+.error-text {
+    color: red;
+}
+
+.success-text {
+    color: rgb(0, 223, 0);
+}
+
 /* styles for the login title */
 h2 {
     font-size: 44px;
@@ -52,6 +67,7 @@ h2>span {
 .forgot-para>span {
     cursor: pointer;
 }
+
 .tAreaLable {
     color: white;
     font-size: 16px;
@@ -59,6 +75,7 @@ h2>span {
     margin-left: 10px;
     font-weight: bold;
 }
+
 .tArea {
     border-radius: 8px;
     border: 1px solid #ccc;

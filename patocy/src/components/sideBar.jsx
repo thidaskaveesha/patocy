@@ -10,8 +10,11 @@ import arrow from "../assets/arrowRight.png";
 import AISupport from "../assets/AISupport.png";
 import councelorsIcon from "../assets/counselorIcon.png";
 import itIndustry from "../assets/itIndustry.png";
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
 import help from "../assets/help.png";
 import logout from "../assets/logOut.png";
+
 
 function SideBar() {
     // State to manage the sidebar collapse
@@ -22,6 +25,17 @@ function SideBar() {
     // Function to toggle sidebar collapse
     const toggleCollapse = () => {
         setCollapsed(!collapsed);
+    };
+
+    // Function to handle sign out
+    const handleSignOut = async () => {
+        try {
+            await signOut(auth); // Calling the signOut function with the auth object
+            // Redirect or do any necessary actions after sign out
+            navigate('/');
+        } catch (error) {
+            console.error('Error signing out:', error);
+        }
     };
 
     return (
@@ -71,7 +85,7 @@ function SideBar() {
                         <p className={collapsed ? styles.hidden : ''}>Help</p> {/* Help text, hidden when collapsed */}
                     </div>
                 </div>
-                <div className={styles.BottomItemTab}>
+                <div className={styles.BottomItemTab} onClick={handleSignOut}>
                     <div className={styles.bottomItem}>
                         <img src={logout} alt="LogOut" /> {/* Logout icon */}
                         <p className={collapsed ? styles.hidden : ''}>Logout</p> {/* Logout text, hidden when collapsed */}
