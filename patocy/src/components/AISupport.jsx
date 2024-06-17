@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styles from "./AISupport.module.css";
 
+
 function AISupport() {
     const [messages, setMessages] = useState([]);
     const [input, setInput] = useState("");
