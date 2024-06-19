@@ -25,6 +25,17 @@ const model = genAI.getGenerativeModel({
     model: "gemini-1.5-flash",
 });
 
+async function generateToprompt(prompt) {
+    // Choose a model that's appropriate for your use case.
+    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    const result = await model.generateContent(prompt);
+    const response = result.response;
+    const text = await response.text(); // Ensure to await the response.text() promise
+    console.log(text);
+    return text; // Return the generated text
+}
+
+
 const generationConfig = {
     temperature: 1,
     topP: 0.95,
@@ -54,10 +65,13 @@ async function generateResponse(answers) {
         return { text: `Great! Next question: ${nextQuestion}`, nextQuestion: nextQuestion };
     } else {
         // Process answers to suggest a job role
-        // For simplicity, we're just returning a placeholder response here
-        return { text: "Based on your answers, I suggest you look into a career in FrontEnd Development.", nextQuestion: null };
+        const prompt = `suggest a jobrole in IT industry based on the answers: ${answers} these answers is based on these questions: ${questions} please only give me a job Role. dont give any other text`
+        const jobRole = await generateToprompt(prompt); // Ensure to await the generateToprompt call
+        console.log("Job Role:", jobRole);
+        return { text: `Based on your answers, I suggest you look into a career in ${jobRole}.`, nextQuestion: null };
     }
 }
+
 
 // Middleware to check API key
 const checkApiKey = (req, res, next) => {
