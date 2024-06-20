@@ -66,13 +66,15 @@ function AISupport() {
                     const aiMessage = { text: data.text, sender: "ai" };
                     setMessages((prevMessages) => [...prevMessages, aiMessage]);
                     setNextQuestion(data.nextQuestion);
+
+                    if (data.jobRole) {
+                        console.log("Job role:", data.jobRole);
+                        setJobSuggestions([{ title: data.jobRole }]);
+                    }
                 }
 
                 setAnswers(updatedAnswers); // Update answers state after successful fetch
 
-                if (!data.nextQuestion) {
-                    setJobSuggestions([{ title: "FrontEnd Developer" }]); // Placeholder suggestion
-                }
             } catch (error) {
                 console.error("Error determining job roles:", error);
             }
@@ -106,10 +108,10 @@ function AISupport() {
             )}
             {jobSuggestions.length > 0 && (
                 <div className={styles.suggestions}>
-                    <h3>Suggested Job Roles:</h3>
+                    <h3>  Suggested Job Roles:</h3>
                     <ul>
                         {jobSuggestions.map((job, index) => (
-                            <li key={index}>{job.title}</li>
+                            <li key={index}><pre>{job.title}</pre></li>
                         ))}
                     </ul>
                 </div>

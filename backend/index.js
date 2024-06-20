@@ -65,11 +65,11 @@ async function generateResponse(answers) {
         return { text: `Great! Next question: ${nextQuestion}`, nextQuestion: nextQuestion };
     } else {
         // Process answers to suggest a job role
-        const prompt = `suggest a jobrole in IT industry based on the answers: ${answers} these answers is based on these questions: ${questions} please only give me a job Role. dont give any other text`
-        const jobRole = await generateToprompt(prompt); // Ensure to await the generateToprompt call
+        const prompt = `suggest a jobrole in IT industry based on the answers: ${answers} these answers is based on these questions: ${questions} please only return Based on your answers, I suggest you look into a career in and the job Role you gonna suggest. dont give any other text and if user's answer is not related to the question please ignore it. and return that you can't suggest a job role based on the answers.`
+        const jobRole = await generateToprompt(prompt); // Call the function to generate the response
         console.log("Job Role:", jobRole);
-        return { text: `Based on your answers, I suggest you look into a career in ${jobRole}.`, nextQuestion: null };
-    }
+        return { text: `${jobRole}.`, nextQuestion: null, jobRole: jobRole };
+    };
 }
 
 
