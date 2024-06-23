@@ -15,6 +15,9 @@ dist-ssr
 # Environment variable files
 .env
 
+# Ignore the config file in the public directory
+patocy/public/config.js
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
