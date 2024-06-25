@@ -45,12 +45,30 @@ const generationConfig = {
 };
 
 const questions = [
-    "What activities have you genuinely enjoyed?",
-    "What made you feel energized, engaged, and excited?",
-    "What are you naturally good at?",
-    "What comes easily to you?",
-    "What's important to you in life?",
-    "What kind of impact do you want to make?"
+    "Do you enjoy designing and creating things, such as art, music, or writing? How do you express your creativity in daily life?",
+    "Have you ever built a website, designed a game, or created any digital art? What did you enjoy most about the process?",
+    "When you think about working in IT, are you more excited about designing user interfaces or coming up with innovative features for software applications?",
+    "Do you find satisfaction in making visually appealing presentations, graphics, or videos?",
+    "How do you approach a project that requires a lot of creativity? Can you describe your process?",
+    "Do you enjoy solving puzzles, playing strategy games, or working on math problems? What about these activities do you find fulfilling?",
+    "Can you describe a situation where you identified a problem and developed a solution for it? What steps did you take?",
+    "When faced with a challenging technical issue, how do you typically approach finding a solution?",
+    "Do you prefer tasks that require logical thinking and detailed analysis? Can you provide an example of such a task you enjoyed?",
+    "How do you handle troubleshooting and debugging issues in technology? Do you find the process rewarding?",
+    "Can you recall a project where you had to use both creative and analytical skills? What was the project, and how did you balance both aspects?",
+    "Do you enjoy brainstorming new ideas and then figuring out how to implement them technically? Can you provide an example?",
+    "How do you feel about improving or optimizing existing systems? Do you enjoy finding innovative ways to enhance performance?",
+    "Have you ever been involved in a project that required collaboration between designers and developers? What role did you play?",
+    "Do you like to prototype and test new concepts, whether in software or hardware? What do you enjoy about this process?",
+    "What kind of tasks do you lose track of time doing? Are they more creative or analytical?",
+    "Do you prefer working on projects that have a clear end goal or those that allow for a lot of exploration and experimentation?",
+    "What motivates you more: creating something new and innovative or improving something that already exists?",
+    "How do you feel about working with data and using it to drive decisions? Do you enjoy identifying patterns and insights from data?",
+    "Are you interested in learning about user experience (UX) design, or do you find backend development more appealing? Why?",
+    "Think about any past projects or activities, whether in school, work, or hobbies. Which ones did you enjoy the most and why?",
+    "Do you have any experience with coding or programming? What did you find most interesting or challenging about it?",
+    "Have you ever participated in a hackathon, coding bootcamp, or similar event? What did you enjoy or learn from the experience?",
+    "What kind of IT-related content do you enjoy consuming (e.g., blogs, podcasts, videos)? Are they more focused on creative or technical topics?"
 ];
 
 async function generateResponse(answers) {
@@ -58,11 +76,11 @@ async function generateResponse(answers) {
     if (answers.length === 0) {
         return [
             { text: "Hello! I'm patocy AI. I'm here to help you with your future career. I determine your passion and the skillset by asking a few questions and suggest a suitable job role inside the IT industry.", nextQuestion: null },
-            { text: "Let's start with the first question: What activities have you genuinely enjoyed?", nextQuestion: questions[0] }
+            { text: "What inspired you to pursue a career in the IT industry?", nextQuestion: questions[0] }
         ];
     } else if (answers.length < questions.length) {
         const nextQuestion = questions[answers.length];
-        return { text: `Great! Next question: ${nextQuestion}`, nextQuestion: nextQuestion };
+        return { text: `${nextQuestion}`, nextQuestion: nextQuestion };
     } else {
         // Process answers to suggest a job role
         const prompt = `suggest a jobrole in IT industry based on the answers: ${answers} these answers is based on these questions: ${questions} please only return Based on your answers, I suggest you look into a career in and the job Role you gonna suggest. dont give any other text and if user's answer is not related to the question please ignore it. and return that you can't suggest a job role based on the answers.`

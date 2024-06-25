@@ -80,6 +80,12 @@ function AISupport() {
             }
         }
     };
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            handleSend();
+        }
+    };
+
 
     return (
         <div className={styles.chatContainer}>
@@ -99,6 +105,7 @@ function AISupport() {
                         className={styles.input}
                         value={input}
                         onChange={(e) => setInput(e.target.value)}
+                        onKeyPress={handleKeyPress}
                         placeholder="Type your message..."
                     />
                     <button className={styles.sendButton} onClick={handleSend}>
