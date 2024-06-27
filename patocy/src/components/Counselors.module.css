@@ -1,0 +1,44 @@
+
+.card h6 {
+    color: black;
+    margin-bottom: 8px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.consultatant-image {
+    width:500px;
+    height:500px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.consultant-list{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.cardContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    justify-content: center;
+    width: 1100px;
+    height: 800px;
+    margin: 10px;
+        /* Center the cards horizontally */
+    gap: 20px;
+        /* Space between the cards */
+    padding: 20px;
+        /* Padding around the container */
+    background-color: #089aa5;
+            /* Light gray background for the container */
+    border-radius: 10px;
+            /* Rounded corners for the container */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Subtle shadow for the container */
+
+
+}
+.cardBackground{
+    width: 100;
+    margin: 10px;
+}
